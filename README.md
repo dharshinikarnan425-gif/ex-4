@@ -72,39 +72,130 @@ Read the input image in color mode.
 ##  Program
 
 ### Developed By:
-**Name:** ____________________________  
+### Name: DHARSHINI K
 
-### Register No:
-____________________________  
+### Register No: 212225240034
+```
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+image = cv2.imread('baseball.jpg')
+image.shape
 
----
+plt.imshow(image[:,:,::-1])
+plt.title('Original Image')
+plt.show()
+
+# i) Image Translation
+tx, ty = 100, 200  
+M_translation = np.float32([[1, 0, tx], [0, 1, ty]])  
+translated_image = cv2.warpAffine(image, M_translation, (636, 438)) 
+
+plt.imshow(translated_image[:,:,::-1])
+plt.title("Translated Image")
+plt.axis('on')
+plt.show()
+fx, fy = 2.0, 1.0  
+scaled_image = cv2.resize(image, None, fx=fx, fy=fy, interpolation=cv2.INTER_LINEAR)
+plt.imshow(scaled_image[:,:,::-1]) 
+plt.title("Scaled Image") 
+plt.axis('on')
+plt.show()
+shear_matrix = np.float32([[1, 0.5, 0], [0.5, 1, 0]])  
+sheared_image = cv2.warpAffine(image, shear_matrix, (636, 438))
+plt.imshow(sheared_image[:,:,::-1])
+plt.title("Sheared Image") 
+plt.axis('on')
+plt.show()
+reflected_image = cv2.flip(image, 2)  
+plt.figure(figsize=(10, 5))
+
+plt.subplot(1, 2, 1)
+plt.imshow(image[:, :, ::-1])
+plt.title("Original Image")
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+plt.imshow(reflected_image[:,:,::-1])
+plt.title("Reflected Image")
+plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+(height, width) = image.shape[:2]  
+angle = 45 
+center = (width // 2, height // 2) 
+M_rotation = cv2.getRotationMatrix2D(center, angle, 1)  
+rotated_image = cv2.warpAffine(image, M_rotation, (width, height)) 
+plt.imshow(cv2.cvtColor(rotated_image, cv2.COLOR_BGR2RGB)) 
+plt.title("Rotated Image")  
+plt.axis('off')
+image .shape    
+angle = 145  
+center = (636 // 2, 438 // 2)  
+M_rotation = cv2.getRotationMatrix2D(center, angle, 1)  
+rotated_image = cv2.warpAffine(image, M_rotation, (width, height)) 
+plt.imshow(rotated_image[:,:,::-1])  # Display the rotated image
+plt.title("Rotated Image")  # Set title
+plt.axis('off')
+plt.show()
+# Image Cropping
+x, y, w, h = 0, 0, 200, 150  
+
+cropped_image = image[y:y+h, x:x+w]   
+plt.figure(figsize=(10, 5))
+
+plt.subplot(1, 2, 1)
+plt.imshow(image[:, :, ::-1])
+plt.title("Original Image")
+plt.axis('on')
+
+plt.subplot(1, 2, 2)
+plt.imshow(cropped_image[:,:,::-1])
+plt.title("Cropped Image")
+plt.axis('on')
+
+plt.tight_layout()
+plt.show()
+```
 
 ##  Output
 
 ### Image Translation
 - Original image is displayed  
-- Translated image (shifted right and down) is displayed  
+- Translated image (shifted right and down) is displayed
+- <img width="745" height="471" alt="image" src="https://github.com/user-attachments/assets/2f0a57fb-584d-4789-bbe4-8350c1bc21d1" />
+  
 
 ### Image Scaling
 - Original image is displayed  
 - Downscaled image (0.5×) is displayed  
-- Upscaled image (2×) is displayed  
+- Upscaled image (2×) is displayed
+- <img width="736" height="554" alt="image" src="https://github.com/user-attachments/assets/2466038a-4994-4a79-8704-f0075a1ee627" />
+- <img width="741" height="289" alt="image" src="https://github.com/user-attachments/assets/fd38e61d-8ae4-4516-a319-9f554e60fae8" />
+
 
 ### Image Shearing
 - Original image is displayed  
 - Horizontally sheared image is displayed  
 - Vertically sheared image is displayed  
+- <img width="726" height="501" alt="image" src="https://github.com/user-attachments/assets/fa0c20b5-e6b7-431d-b1f9-dfbc036331c2" />
 
 ### Image Reflection
 - Original image is displayed  
 - Horizontally flipped image is displayed  
 - Vertically flipped image is displayed  
 - Both-axis flipped image is displayed  
+- <img width="502" height="344" alt="image" src="https://github.com/user-attachments/assets/aa452f83-4ea1-4365-a3df-bf28f059cad7" />
 
 ### Image Rotation
 - Original image is displayed  
-- 45° rotated image is displayed  
-- 90° rotated image is displayed  
+- 45° rotated image is displayed
+- <img width="696" height="396" alt="image" src="https://github.com/user-attachments/assets/4bbb0b90-1b34-4d2d-a1c7-6e8f55014e9e" />
+
+- 90° rotated image is displayed
+- <img width="736" height="449" alt="image" src="https://github.com/user-attachments/assets/eeafafee-72fa-4945-9c63-b6fc5aa4bf00" />
+
 
 ---
 
